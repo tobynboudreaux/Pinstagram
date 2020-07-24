@@ -32,7 +32,7 @@ post_collection = []
 
 # end
 
-Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "lol, this is a post lol.")
+Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "lol, this is a post lol.", like_count: 2)
 
 Comment.create(content: "Lol, very funny lol", post_id: 1)
 
