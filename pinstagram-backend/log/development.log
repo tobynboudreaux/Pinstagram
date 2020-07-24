@@ -1,0 +1,214 @@
+  [1m[35m (8.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePosts (20200724160138)
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "image_url" varchar, "content" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200724160138"]]
+  [1m[35m (8.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateComments (20200724160739)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar, "post_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_post_id" ON "comments" ("post_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200724160739"]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateLikes (20200724160805)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_likes_on_post_id" ON "likes" ("post_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200724160805"]]
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-24 16:09:54.675384"], ["updated_at", "2020-07-24 16:09:54.675384"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mPost Destroy (0.5ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mLike Destroy (0.3ms)[0m  [1m[31mDELETE FROM "likes"[0m
+  [1m[36mComment Destroy (0.7ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Create (1.2ms)[0m  [1m[32mINSERT INTO "posts" ("title", "image_url", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Yeet"], ["image_url", "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg"], ["content", "lol, this is a post lol."], ["created_at", "2020-07-24 16:37:35.547141"], ["updated_at", "2020-07-24 16:37:35.547141"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mComment Create (1.9ms)[0m  [1m[32mINSERT INTO "comments" ("content", "post_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Lol, very funny lol"], ["post_id", 1], ["created_at", "2020-07-24 16:37:35.593117"], ["updated_at", "2020-07-24 16:37:35.593117"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mLike Create (3.3ms)[0m  [1m[32mINSERT INTO "likes" ("post_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["post_id", 1], ["created_at", "2020-07-24 16:37:35.899908"], ["updated_at", "2020-07-24 16:37:35.899908"]]
+  [1m[35m (3.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mLike Load (0.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 11]]
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 11]]
+Started GET "/" for ::1 at 2020-07-24 11:38:35 -0500
+  [1m[35m (21.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 50.8ms | Allocations: 480)
+Completed 200 OK in 484ms (Views: 357.7ms | ActiveRecord: 0.0ms | Allocations: 2631)
+
+
+Started GET "/posts" for ::1 at 2020-07-24 11:38:44 -0500
+  
+SyntaxError (/Users/tobyboudreaux/Flatiron/Code/Mod 3/Project/Project3/pinstagram-backend/app/controllers/posts_controller.rb:5: syntax error, unexpected tIDENTIFIER, expecting end
+        render :json posts, include: [:likes, :comments]
+                     ^~~~~):
+  
+app/controllers/posts_controller.rb:5: syntax error, unexpected tIDENTIFIER, expecting end
+app/controllers/posts_controller.rb:5: syntax error, unexpected tIDENTIFIER, expecting end
+Started GET "/posts" for ::1 at 2020-07-24 11:40:03 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 386ms (Views: 318.0ms | ActiveRecord: 6.3ms | Allocations: 18966)
+
+
+Started GET "/favicon.ico" for ::1 at 2020-07-24 11:40:04 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/likes" for ::1 at 2020-07-24 11:40:57 -0500
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for LikesController):
+  
+actionpack (6.0.3.2) lib/abstract_controller/base.rb:131:in `process'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/posts" for ::1 at 2020-07-24 11:45:17 -0500
+Processing by PostsController#index as */*
+  [1m[36mPost Load (2.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.8ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 191ms (Views: 165.5ms | ActiveRecord: 3.3ms | Allocations: 3109)
+
+
+Started GET "/posts" for ::1 at 2020-07-24 11:49:59 -0500
+Processing by PostsController#index as */*
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.7ms | Allocations: 3109)
+
+
+Started GET "/posts" for ::1 at 2020-07-24 11:50:32 -0500
+Processing by PostsController#index as */*
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 32ms (Views: 30.5ms | ActiveRecord: 0.7ms | Allocations: 3124)
+
+
+Started GET "/posts" for ::1 at 2020-07-24 11:51:22 -0500
+Processing by PostsController#index as */*
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 16ms (Views: 14.7ms | ActiveRecord: 0.8ms | Allocations: 3126)
+
+
+Started GET "/posts" for ::1 at 2020-07-24 11:51:24 -0500
+Processing by PostsController#index as */*
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.0ms | Allocations: 3124)
+
+
