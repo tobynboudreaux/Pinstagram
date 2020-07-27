@@ -32,8 +32,13 @@ post_collection = []
 
 # end
 
-Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "lol, this is a post lol.", like_count: 2)
+Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: ["lol, this is a post lol."], like_count: 2)
+
+Post.create(title: "Burnnn!", image_url: "https://images.unsplash.com/photo-1556195332-95503f664ced?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80", content: ["Yay Magic!!!"], like_count: 10)
 
 Comment.create(content: "Lol, very funny lol", post_id: 1)
 
+Comment.create(content: "Yay Magic !!!", post_id: 2)
+
 Like.create(post_id: 1) 
+Like.create(post_id: 2) 
