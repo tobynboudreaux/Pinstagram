@@ -4,7 +4,7 @@ const commentURL = "http://localhost3000/comments"
 
 document.addEventListener('DOMContentLoaded', () => {
     getData();
-
+    newPost();
 })
 
 function getData() {
@@ -27,13 +27,40 @@ function renderPosts(posts) {
 }
 
 function createPostCard(post, postCard) {
-    postCard.innerHTML = `
-        <h1>${post.title}</h1>
-        <img src="${post.image_url}">
+    const newDiv = document.createElement('div')
+        newDiv.setAttribute('id', 'post-list')
+        newDiv.innerHTML = `
+        <h2>${post.title}</h2>
+        <img src="${post.image_url}" class="post-image">
         <h3>${post.content}</h3>
-    `
+        `
+        postCard.append(newDiv)
 
 }
+function newPost() {
+    const postForm = document.querySelector('.add-post-form')
+    postForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        postFetch(e); 
+    })
+};
+
+function postFetch(e){  
+      fetch(postURL, {
+        method: 'POST',
+        body: JSON.stringify({ 
+            "title": e.target.title.value,
+            "image_url": e.target.image.value,
+            "likes": 0,
+            "comments": []
+    }), 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }})
+      .then(resp => resp.json())
+      .then(json => console.log(json));
+};
 
 function addLikes(post, postCard) { 
     let likesCont = document.createElement('div')
