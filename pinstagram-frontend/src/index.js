@@ -10,102 +10,100 @@ document.addEventListener('DOMContentLoaded', () => {
 function getData() {
     fetch(postURL)
     .then(res => res.json())
-    .then(json => {
-        json.forEach(post => {
-            renderPosts(post)
-    })
-
-    })
+    .then(json => json.data.forEach(data => {
+        createPostCard(data.attributes)
+    }))
 }
 
-function renderPosts(posts) {
-    const postCard = document.getElementById('post')
-    createPostCard(posts, postCard)   
-    
 
-}
-
-function createPostCard(post, postCard) {
-    postCard.innerHTML += `
-        <h1>${post.title}</h1>
-        <img src="${post.image_url}">
-        <h3>${post.content}</h3>
-    `
-    addLikes(post, postCard)
-    addComments(post, postCard)
-
-}
-
-function addLikes(post, postCard) { 
-    let likesCont = document.createElement('div')
-    likesCont.id = 'likesCont'
-    likesCont.innerHTML = `
-        <p>Likes: ${post.like_count}</p>
-        <button id='likebtn'>Like</button>
-    `
-    postCard.appendChild(likesCont)
-
-    let likeBtn = document.getElementById('likebtn')
-    likeHandler(likeBtn, post)
-    
-}
-
-function likeHandler(btn, post) {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault()
-        console.log('like')
-    })
-}
-
-function addComments(post, postCard) {
-    let commentsCont = document.createElement('div')
-    commentsCont.id = 'commentsCont'
-    commentsCont.innerHTML = `
-    <h3>Comments</h3>
-    <button id="commentBtn">Comment</button>
-    `
-
-    postCard.appendChild(commentsCont)
-    addCommentForm(commentsCont)
-
-    ul = document.createElement('ul')
+function createPostCard(post, data) {
+    const postCont = document.getElementById('post') 
+    const newDiv =  document.createElement('div')    
+    newDiv.setAttribute('id', 'post-card')    
+    postCont.append(newDiv)    
+    newDiv.innerHTML += `        
+        <h1>${post.title}</h1>       
+        <img src="${post.image_url}">        
+        <h3>${post.content}</h3>        
+        <p id='like'>Likes: ${post.likes.length}</p>        
+        <button id="likebtn-${post.id}">Like</button>    
+        <div>
+        <h3>Comments</h3>
+        <div id="button-form-${post.id}">
+        <button id="commentBtn-${post.id}">Comment</button>
+        </div>
+        <ul id='comment-list-${post.id}'>
+        </ul>
+        </div>
+    `    
+    ul = document.getElementById(`comment-list-${post.id}`)
     post.comments.forEach(comment => {
         ul.innerHTML += `
-        <br><br>
                 <li>${comment.content}</li>
         <br><br>
         `
     })
-
-    postCard.appendChild(ul)
-
-}
-
-function createCommentForm(commentsCont) {
-    let form = document.createElement('form')
-    form.id = 'commentForm'
-    form.innerHTML = `
-            <input id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
-            <input type="submit" value="Submit"/>
-    `
-    commentsCont.appendChild(form)
-}
-
-function addCommentForm(element) {
-    let commentBtn = document.getElementById('commentBtn')
+    newDiv.appendChild(ul)
+    let likeBtn = document.getElementById(`likebtn-${post.id}`)   
+    likeBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        postLikes(post);
+    })
+    let btnFrm = document.getElementById(`button-form-${post.id}`)
+    let commentBtn = document.getElementById(`commentBtn-${post.id}`)
     commentBtn.addEventListener('click', (e) => {
         e.preventDefault()
         commentBtn.classList.add('hidden')
-        createCommentForm(element)
-        form = document.getElementsByTagName('form')[0]
+        let form = document.createElement('form')
+        form.id = `commentForm-${post.id}`
+        form.innerHTML = `
+            <input id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
+            <input type="submit" value="Submit"/>
+        `
+        btnFrm.appendChild(form)
+        form = document.getElementById(`commentForm-${post.id}`)
         form.addEventListener('submit', (e) => {
             e.preventDefault()
-            element.removeChild(form)
+            btnFrm.removeChild(form)
             commentBtn.classList.remove('hidden')
             const comment = {
                 "content": e.target.comment_input.value
             }
-            console.log(comment)
+            let ul = document.getElementById(`comment-list-${post.id}`)
+            ul.innerHTML += `
+                <li>${comment.content}</li>
+            <br><br>
+            `
+            postComment(comment, post)
+        })
+    })
+  
+}
+
+function postLikes(post) {
+    fetch(likeURL, {
+        method:"POST",
+        headers: {
+            "Content-type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify({
+            post_id: post.id
         })
     })
 }
+
+function postComment(comment, post) {
+    fetch(commentURL, {
+        method:"POST",
+        headers: {
+            "Content-type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify({
+            "post_id": post.id,
+            "comments": comment
+        })
+    })
+}
+

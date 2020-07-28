@@ -35,3 +35,5 @@ Post.create(title: "YAH", image_url: "http://www.opsopet.com/wp-content/uploads/
 Comment.create(content: "Lol, very funny lol", post_id: 1)
 
 Like.create(post_id: 1) 
+Like.create(post_id: 2)
+Like.create(post_id: 2)
