@@ -8,10 +8,6 @@
 require 'faker'
 require 'securerandom'
 
-Post.delete_all
-Like.delete_all
-Comment.delete_all
-
 post_collection = []
 
 # 10.times do 
@@ -33,6 +29,8 @@ post_collection = []
 # end
 
 Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "lol, this is a post lol.", like_count: 2)
+
+Post.create(title: "YAH", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "Part 2, I needa see twice the Likes!", like_count: 4)
 
 Comment.create(content: "Lol, very funny lol", post_id: 1)
 

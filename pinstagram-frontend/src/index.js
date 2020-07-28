@@ -11,27 +11,28 @@ function getData() {
     fetch(postURL)
     .then(res => res.json())
     .then(json => {
-        renderPosts(json)
+        json.forEach(post => {
+            renderPosts(post)
     })
 
+    })
 }
 
 function renderPosts(posts) {
     const postCard = document.getElementById('post')
-    posts.forEach(post => {
-        createPostCard(post, postCard),
-        addLikes(post, postCard),
-        addComments(post, postCard)
-    })
+    createPostCard(posts, postCard)   
+    
 
 }
 
 function createPostCard(post, postCard) {
-    postCard.innerHTML = `
+    postCard.innerHTML += `
         <h1>${post.title}</h1>
         <img src="${post.image_url}">
         <h3>${post.content}</h3>
     `
+    addLikes(post, postCard)
+    addComments(post, postCard)
 
 }
 
@@ -43,7 +44,17 @@ function addLikes(post, postCard) {
         <button id='likebtn'>Like</button>
     `
     postCard.appendChild(likesCont)
+
+    let likeBtn = document.getElementById('likebtn')
+    likeHandler(likeBtn, post)
     
+}
+
+function likeHandler(btn, post) {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        console.log('like')
+    })
 }
 
 function addComments(post, postCard) {
@@ -55,7 +66,7 @@ function addComments(post, postCard) {
     `
 
     postCard.appendChild(commentsCont)
-    addCommentForm(post, commentsCont)
+    addCommentForm(commentsCont)
 
     ul = document.createElement('ul')
     post.comments.forEach(comment => {
@@ -80,12 +91,12 @@ function createCommentForm(commentsCont) {
     commentsCont.appendChild(form)
 }
 
-function addCommentForm(post, element) {
+function addCommentForm(element) {
     let commentBtn = document.getElementById('commentBtn')
     commentBtn.addEventListener('click', (e) => {
         e.preventDefault()
         commentBtn.classList.add('hidden')
-        createCommentForm(commentsCont)
+        createCommentForm(element)
         form = document.getElementsByTagName('form')[0]
         form.addEventListener('submit', (e) => {
             e.preventDefault()
