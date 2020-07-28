@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_07_24_160805) do
     t.string "title"
     t.string "image_url"
     t.string "content"
-    t.integer "like_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

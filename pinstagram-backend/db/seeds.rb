@@ -28,12 +28,5 @@ post_collection = []
 
 # end
 
-Post.create(title: "Yeet", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "lol, this is a post lol.", like_count: 2)
+Post.create(title: "The End is Never The End", image_url: "https://i.ytimg.com/vi/f97EVvDJNUs/0.jpg", content: "The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is")
 
-Post.create(title: "YAH", image_url: "http://www.opsopet.com/wp-content/uploads/2017/06/Siberian-Husky.jpg", content: "Part 2, I needa see twice the Likes!", like_count: 4)
-
-Comment.create(content: "Lol, very funny lol", post_id: 1)
-
-Like.create(post_id: 1) 
-Like.create(post_id: 2)
-Like.create(post_id: 2)
