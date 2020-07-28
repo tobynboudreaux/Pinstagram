@@ -3,8 +3,8 @@ const likeURL = "http://localhost:3000/likes"
 const commentURL = "http://localhost:3000/comments"
 
 document.addEventListener('DOMContentLoaded', () => {
-    getData();
-
+    getData(),
+    createPost()
 })
 
 function getData() {
@@ -17,6 +17,61 @@ function getData() {
     }))
 }
 
+function createPost() {
+    let top = document.getElementById('top')
+    let button = document.createElement('button')
+    top.appendChild(button)
+    button.id = "create-post"
+    button.innerText = "Create New Post"
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        button.classList.add('hidden')
+        createPostForm();
+    })
+
+}
+
+function createPostForm() {
+    let top = document.getElementById('top')
+    let form = document.createElement('form')
+    let button = document.getElementById('create-post')
+    top.appendChild(form)
+    form.innerHTML = `
+        <input id="title_input" type="text" name="title" placeholder="Add Title"/>
+        <input id="image_input" type="text" name="imgae" placeholder="Add Image URL"/>
+        <input id="content_input" type="text" name="content" placeholder="Add Content"/>
+        <input type="submit" value="Submit"/>
+    `
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const post = {
+            "title": e.target.title_input.value,
+            "image_url": e.target.image_input.value,
+            "content": e.target.image_input.value
+        }
+        console.log(post)
+        button.classList.remove('hidden')
+        top.removeChild(form)
+        postNewPost(post)
+    })
+}
+
+function postNewPost(post) {
+    fetch(postURL, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            Accept: "applicaion/json"
+        },
+        body: JSON.stringify(post)
+    })
+    .then(resp => resp.json())
+    .then(json => {
+        createPostCard(json.data.attributes),
+        renderLikes(json.data.attributes),
+        renderComments(json.data.attributes)
+    })
+}
 
 function createPostCard(post) {
     const postCont = document.getElementById('post') 
