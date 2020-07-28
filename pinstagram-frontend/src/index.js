@@ -47,7 +47,7 @@ function createPostForm() {
         const post = {
             "title": e.target.title_input.value,
             "image_url": e.target.image_input.value,
-            "content": e.target.image_input.value
+            "content": e.target.content_input.value
         }
         console.log(post)
         button.classList.remove('hidden')
