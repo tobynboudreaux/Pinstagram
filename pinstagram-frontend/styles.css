@@ -1,3 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
 .hidden {
     display: none;
+}
+
+header{
+    text-align: center;
+    font-size: xx-large;
+    text-shadow: 2px 2px 15px ghostwhite;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background: #101016;
+    font-family: 'Quicksand', sans-serif;
+    color: rgb(233, 233, 233);
+}
+
+.container{
+    width: 1200px;
+    margin: 200px auto;
+    columns: 4;
+    column-gap: 40px;
+    color: rgb(233, 233, 233);
+}
+
+.container .post-card{
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px;
+    /* background: #6C6C6C; */
+    background-image: linear-gradient(to bottom right, rgb(36, 38, 48), rgb(87, 110, 116) );
+    box-shadow: 5px 5px 10px rgb(19, 19, 19);
+    overflow: hidden;
+    break-inside: avoid;
+}
+.container .post-card img{
+    max-width: 100%;
+}
+.container .post-card h1{
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 20px;
+    
+    font-weight: bolder;
+}
+
+.container .post-card h3{
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.like-container p{
+    margin: 10px 0 0;
+    padding: 0 0 10px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+button{
+    background-color:  rgb(66, 98, 124);
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    background-color: rgb(68, 68, 95);
+}
+
+.like-btn{
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(209, 209, 209);
+    /* font-weight: bolder; */
+}
+
+.like-btn:hover{
+    background-color: rgb(36, 38, 48);
+    
+}
+
+.comment-btn{
+    background-color:rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(209, 209, 209);
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    /* font-weight: bolder; */
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+
+.comment-btn:hover{
+    background-color: rgb(36, 38, 48);
+    
+}
+
+.btn-form #comment_input{
+    width: 100%;
+  /* overflow: hidden; */
+  font-size: 15px;
+  text-align: right;
+  padding: 3px 0;
+  margin: 3px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #cecece;
+  color: #cecece;
+  outline: 0;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+
+}
+
+.submit-comment{
+    background-color:rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(209, 209, 209);
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    /* font-weight: bolder; */
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+.submit-comment:hover{
+    background-color: rgb(36, 38, 48);
+}
+
+.comment-list{
+    list-style-type: none;
+    text-align: right;
+    font-size: 15px;
+    padding: 20px;
+    background-color: rgb(36, 38, 48);
+}
+.comment-list li{
+    background-image: linear-gradient(to left,rgb(87, 110, 116), rgba(0, 0, 0, 0));
+    padding: 3px;
+}
+
+
+
+@media (max-width: 1200px)
+{
+    .container{
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0;
+    }
+    
+}
+
+@media (max-width: 770px)
+{
+    .container{
+        columns: 2;
+    
+    }    
+}
+
+@media (max-width: 450px)
+{
+    .container{
+        columns: 1;
+
+    }    
 }
