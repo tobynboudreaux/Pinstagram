@@ -9740,3 +9740,44 @@ Processing by UsersController#create as JSON
 Completed 201 Created in 339ms (Views: 5.3ms | ActiveRecord: 5.0ms | Allocations: 6576)
 
 
+Started POST "/users" for ::1 at 2020-07-29 17:01:06 -0500
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"programmer", "password"=>"[FILTERED]", "email"=>"xemnikk@gmail.com"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "programmer"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "xemnikk@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "programmer"], ["email", "xemnikk@gmail.com"], ["password_digest", "$2a$12$xitjaXAI0H9VzpGrCUEEiu66VvxOBmdTzBxqXF2MSdCNytC7Nc0ZW"], ["created_at", "2020-07-29 22:01:07.348776"], ["updated_at", "2020-07-29 22:01:07.348776"]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "programmer"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "xemnikk@gmail.com"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (9.41ms)
+Completed 201 Created in 502ms (Views: 13.2ms | ActiveRecord: 7.6ms | Allocations: 12383)
+
+
+Started POST "/login" for ::1 at 2020-07-29 17:02:08 -0500
+Started GET "/posts" for ::1 at 2020-07-29 17:02:08 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (3.09ms)
+Completed 200 OK in 16ms (Views: 3.7ms | ActiveRecord: 0.6ms | Allocations: 3522)
+
+
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"programmer", "email"=>"xemnikk@gmail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"programmer", "email"=>"xemnikk@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "programmer"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 364ms (Views: 1.3ms | ActiveRecord: 0.5ms | Allocations: 973)
+
+

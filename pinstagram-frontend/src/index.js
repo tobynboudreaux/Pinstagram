@@ -82,7 +82,7 @@ function fetchNewUser(e) {
         })
       })
         .then(r => r.json())
-        .then(json => console.log(json))
+        .then(alert('reload and log in!'))
 }
 
 function getData() {
