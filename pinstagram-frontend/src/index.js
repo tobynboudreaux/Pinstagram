@@ -2,10 +2,88 @@ const postURL = "http://localhost:3000/posts"
 const likeURL = "http://localhost:3000/likes"
 const commentURL = "http://localhost:3000/comments"
 
+const loginDiv = document.getElementById('login-window')
+const loginForm = document.getElementById('login-form')
+const createForm = document.getElementById('new-user-form')
+let loginBtn = document.createElement('button')
+let createBtn = document.createElement('button')
+createBtn.innerText = "Sign Up"
+loginBtn.innerText = "Login"
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    getData(),
-    createPost()
+    loginForm.classList.add('hidden')
+    createForm.classList.add('hidden')
+    loginDiv.append(loginBtn, createBtn)
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginBtn.classList.add('hidden')
+        createBtn.classList.add('hidden')
+        loginForm.classList.remove('hidden')
+        loginFormHandler(e)
+    })
+    createBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginBtn.classList.add('hidden')
+        createBtn.classList.add('hidden')
+        createForm.classList.remove('hidden')
+        createFormHandler(e)
+    })
 })
+
+function loginFormHandler(e) {
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const user = {
+            "username": e.target.username_input.value,
+            "email": e.target.email_input.value,
+            "password": e.target.password_input.value
+        }
+        loginForm.classList.add('hidden')
+        fetchLogin(user);
+    })
+}
+
+function fetchLogin(user) {
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(resp => resp.json())
+    .then(getData(), createPost())
+}
+
+function createFormHandler(e) {
+    createForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        createForm.classList.add('hidden')
+        fetchNewUser(e);
+    })
+}
+
+function fetchNewUser(e) {
+    fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                username: e.target.username_input.value,
+                password: e.target.password_input.value,
+                email: e.target.email_input.value
+            }
+        })
+      })
+        .then(r => r.json())
+        .then(json => console.log(json))
+}
 
 function getData() {
     fetch(postURL)
