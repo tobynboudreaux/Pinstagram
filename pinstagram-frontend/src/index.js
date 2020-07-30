@@ -7,12 +7,16 @@ const loginForm = document.getElementById('login-form')
 const createForm = document.getElementById('new-user-form')
 let loginBtn = document.createElement('button')
 let createBtn = document.createElement('button')
+let logoutBtn = document.createElement('button')
+
 createBtn.innerText = "Sign Up"
 loginBtn.innerText = "Login"
-
+logoutBtn.innerText = 'Logout'
+let currentUser = {}
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    loggedIn()
     loginForm.classList.add('hidden')
     createForm.classList.add('hidden')
     loginDiv.append(loginBtn, createBtn)
@@ -30,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createForm.classList.remove('hidden')
         createFormHandler(e)
     })
+  
 })
 
 function loginFormHandler(e) {
@@ -49,13 +54,38 @@ function fetchLogin(user) {
     fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json',
-            Accept: 'application/json'
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
+        // credentials: 'include',
         body: JSON.stringify(user)
     })
     .then(resp => resp.json())
-    .then(getData(), createPost())
+    .then(json => {
+        sessionStorage.setItem('username', json.username),
+        sessionStorage.setItem('email', json.email)
+        sessionStorage.setItem('id', json.id)
+        location.reload()
+        getData(), 
+        createPost()
+    })
+    
+}
+
+function loggedIn() {
+    if (sessionStorage.length != 0) {
+        loginBtn.classList.add('hidden')
+        createBtn.classList.add('hidden')
+        loginDiv.appendChild(logoutBtn)
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            sessionStorage.clear()
+            location.reload()
+        })
+        getData(),
+        createPost()
+
+    }
 }
 
 function createFormHandler(e) {
@@ -73,6 +103,7 @@ function fetchNewUser(e) {
           'Content-Type': 'application/json',
           Accept: 'application/json'
         },
+        // credentials: 'include',
         body: JSON.stringify({
             user: {
                 username: e.target.username_input.value,
@@ -82,7 +113,7 @@ function fetchNewUser(e) {
         })
       })
         .then(r => r.json())
-        .then(alert('reload and log in!'))
+        .then(location.reload())
 }
 
 function getData() {
@@ -125,7 +156,8 @@ function createPostForm() {
         const post = {
             "title": e.target.title_input.value,
             "image_url": e.target.image_input.value,
-            "content": e.target.content_input.value
+            "content": e.target.content_input.value,
+            "user_id": sessionStorage["user_id"]
         }
         console.log(post)
         button.classList.remove('hidden')
@@ -197,6 +229,7 @@ function postLikes(post) {
             post_id: post.id
         })
     })
+ 
     
 }
 
@@ -215,6 +248,7 @@ function renderComments(post) {
                 <li>${comment.content}</li>
         <br><br>
         `
+    
     })
     card.appendChild(ul)
     newComment(post)
@@ -264,7 +298,8 @@ function postComment(comment, post) {
         },
         body: JSON.stringify({
             content: comment,
-            post_id: post.id
+            post_id: post.id,
+            user_id: sessionStorage["user_id"]
         })
     })
    
