@@ -9781,3 +9781,1892 @@ Processing by AuthController#login as JSON
 Completed 200 OK in 364ms (Views: 1.3ms | ActiveRecord: 0.5ms | Allocations: 973)
 
 
+Started POST "/users" for ::1 at 2020-07-29 19:00:43 -0500
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"TobyBboy", "password"=>"[FILTERED]", "email"=>"yeeticus@mail.com"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "yeeticus@mail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "TobyBboy"], ["email", "yeeticus@mail.com"], ["password_digest", "$2a$12$C4UQ3vdr0b5z.Z26q4UsKOvfrjeKwe7SvOqfgOqeA0DSyK7y3taHi"], ["created_at", "2020-07-30 00:00:43.546909"], ["updated_at", "2020-07-30 00:00:43.546909"]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "TobyBboy"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "yeeticus@mail.com"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.38ms)
+Completed 201 Created in 253ms (Views: 2.2ms | ActiveRecord: 5.0ms | Allocations: 12384)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 19:00:59 -0500
+Started POST "/login" for ::1 at 2020-07-29 19:00:59 -0500
+Processing by PostsController#index as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+[active_model_serializers]   [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+Processing by AuthController#login as JSON
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (9.41ms)
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+Completed 200 OK in 21ms (Views: 9.7ms | ActiveRecord: 1.3ms | Allocations: 4909)
+
+
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 200 OK in 238ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 1165)
+
+
+Started POST "/posts" for ::1 at 2020-07-29 19:02:20 -0500
+Processing by PostsController#create as 
+  Parameters: {"title"=>"John H. Conway's Game of Life", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"This is a simulation of John H. Conway's Game of Life algorithm.", "post"=>{"title"=>"John H. Conway's Game of Life", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"This is a simulation of John H. Conway's Game of Life algorithm."}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (9.15ms)
+Completed 200 OK in 261ms (Views: 9.1ms | ActiveRecord: 1.3ms | Allocations: 203507)
+
+
+Started POST "/likes" for ::1 at 2020-07-29 19:02:49 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>nil, "like"=>{"post_id"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (0.39ms)
+Completed 200 OK in 38ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 3613)
+
+
+Started POST "/comments" for ::1 at 2020-07-29 19:03:00 -0500
+Processing by CommentsController#create as JSON
+  Parameters: {"content"=>"Very Cool. ", "post_id"=>nil, "comment"=>{"content"=>"Very Cool. ", "post_id"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with CommentSerializer (0.43ms)
+Completed 200 OK in 17ms (Views: 1.4ms | ActiveRecord: 0.6ms | Allocations: 5116)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 19:23:09 -0500
+Started POST "/login" for ::1 at 2020-07-29 19:23:09 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.18ms)
+Completed 200 OK in 255ms (Views: 1.4ms | ActiveRecord: 0.6ms | Allocations: 6874)
+
+
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (2.89ms)
+Completed 200 OK in 9ms (Views: 3.0ms | ActiveRecord: 0.4ms | Allocations: 3019)
+
+
+Started POST "/posts" for ::1 at 2020-07-29 19:23:29 -0500
+Processing by PostsController#create as 
+  Parameters: {"title"=>"How do I access my tables in ActiveRecord", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never ", "post"=>{"title"=>"How do I access my tables in ActiveRecord", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never The End is Never "}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (7.2ms)
+Completed 200 OK in 32ms (Views: 7.8ms | ActiveRecord: 0.0ms | Allocations: 6378)
+
+
+Started POST "/likes" for ::1 at 2020-07-29 19:23:42 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>nil, "like"=>{"post_id"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (0.58ms)
+Completed 200 OK in 16ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 3372)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 19:24:35 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (5.68ms)
+Started POST "/login" for ::1 at 2020-07-29 19:24:35 -0500
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.3ms | Allocations: 1391)
+
+
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 263ms (Views: 1.5ms | ActiveRecord: 0.4ms | Allocations: 803)
+
+
+Started POST "/posts" for ::1 at 2020-07-29 19:24:40 -0500
+Processing by PostsController#create as 
+  Parameters: {"title"=>"How do I access my tables in ActiveRecord", "image_url"=>"https://i.ytimg.com/vi/f97EVvDJNUs/0.jpg", "content"=>"sadasdada", "user_id"=>1, "post"=>{"title"=>"How do I access my tables in ActiveRecord", "image_url"=>"https://i.ytimg.com/vi/f97EVvDJNUs/0.jpg", "content"=>"sadasdada", "user_id"=>1}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[36mPost Create (8.4ms)[0m  [1m[32mINSERT INTO "posts" ("title", "image_url", "content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "How do I access my tables in ActiveRecord"], ["image_url", "https://i.ytimg.com/vi/f97EVvDJNUs/0.jpg"], ["content", "sadasdada"], ["user_id", 1], ["created_at", "2020-07-30 00:24:40.545268"], ["updated_at", "2020-07-30 00:24:40.545268"]]
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:11:in `create'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:11:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (6.36ms)
+Completed 200 OK in 66ms (Views: 6.2ms | ActiveRecord: 16.0ms | Allocations: 8817)
+
+
+Started POST "/likes" for ::1 at 2020-07-29 19:24:57 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (2.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Create (2.1ms)[0m  [1m[32mINSERT INTO "likes" ("post_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["post_id", 1], ["created_at", "2020-07-30 00:24:57.241674"], ["updated_at", "2020-07-30 00:24:57.241674"]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (2.16ms)
+Completed 200 OK in 24ms (Views: 3.1ms | ActiveRecord: 6.0ms | Allocations: 4067)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 19:26:30 -0500
+Started POST "/login" for ::1 at 2020-07-29 19:26:30 -0500
+Processing by PostsController#index as */*
+Processing by AuthController#login as JSON
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+Completed 200 OK in 269ms (Views: 1.6ms | ActiveRecord: 0.2ms | Allocations: 2247)
+
+
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (274.75ms)
+Completed 200 OK in 276ms (Views: 274.8ms | ActiveRecord: 0.8ms | Allocations: 4756)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:00:30 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:00:30 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.8ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (33.76ms)
+  
+SyntaxError (/Users/tobyboudreaux/Flatiron/Code/Mod 3/Project/Pinstagram/pinstagram-backend/app/controllers/auth_controller.rb:18: syntax error, unexpected else
+        else
+        ^~~~):
+  
+app/controllers/auth_controller.rb:18: syntax error, unexpected else
+app/controllers/auth_controller.rb:18: syntax error, unexpected else
+Completed 200 OK in 47ms (Views: 35.2ms | ActiveRecord: 1.8ms | Allocations: 14547)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:01:02 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:01:03 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (25.68ms)
+Completed 200 OK in 31ms (Views: 24.2ms | ActiveRecord: 2.2ms | Allocations: 14862)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 200 OK in 270ms (Views: 0.7ms | ActiveRecord: 1.3ms | Allocations: 7214)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:02:03 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:02:03 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+Processing by AuthController#login as JSON
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (27.65ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+Completed 200 OK in 40ms (Views: 33.0ms | ActiveRecord: 2.4ms | Allocations: 18112)
+
+
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 281ms (Views: 0.6ms | ActiveRecord: 1.6ms | Allocations: 7194)
+
+
+Started GET "/" for ::1 at 2020-07-29 20:13:38 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 178.8ms | Allocations: 315)
+Completed 200 OK in 201ms (Views: 190.3ms | ActiveRecord: 0.0ms | Allocations: 1748)
+
+
+Started GET "/routes" for ::1 at 2020-07-29 20:13:44 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/routes"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/routes" for ::1 at 2020-07-29 20:14:42 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+ActionController::RoutingError (No route matches [GET] "/routes"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/login" for ::1 at 2020-07-29 20:18:43 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.23ms)
+Completed 200 OK in 260ms (Views: 1.6ms | ActiveRecord: 1.4ms | Allocations: 7369)
+
+
+Started GET "/routes" for ::1 at 2020-07-29 20:19:21 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/routes"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/posts" for ::1 at 2020-07-29 20:20:17 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:20:17 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+Processing by AuthController#login as JSON
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (277.23ms)
+Completed 200 OK in 252ms (Views: 1.5ms | ActiveRecord: 0.9ms | Allocations: 9440)
+
+
+Completed 200 OK in 282ms (Views: 275.1ms | ActiveRecord: 2.8ms | Allocations: 21818)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:20:32 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+Started POST "/login" for ::1 at 2020-07-29 20:20:32 -0500
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+Processing by AuthController#login as JSON
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (12.51ms)
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+Completed 200 OK in 14ms (Views: 12.3ms | ActiveRecord: 1.1ms | Allocations: 4489)
+
+
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 245ms (Views: 1.0ms | ActiveRecord: 0.5ms | Allocations: 999)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:21:04 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:21:04 -0500
+Processing by PostsController#index as */*
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+Completed 200 OK in 252ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 2885)
+
+
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (257.07ms)
+Completed 200 OK in 259ms (Views: 257.6ms | ActiveRecord: 0.7ms | Allocations: 4811)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:21:30 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:21:30 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+Processing by PostsController#index as */*
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers]   [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (331.69ms)
+Completed 200 OK in 327ms (Views: 1.5ms | ActiveRecord: 1.4ms | Allocations: 16975)
+
+
+Completed 200 OK in 337ms (Views: 329.3ms | ActiveRecord: 3.0ms | Allocations: 21806)
+
+
+Started POST "/logged_in" for ::1 at 2020-07-29 20:21:30 -0500
+Processing by AuthController#logged_in as JSON
+  Parameters: {"_json"=>6, "auth"=>{"_json"=>6}}
+Completed 404 Not Found in 5ms (ActiveRecord: 0.0ms | Allocations: 126)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started GET "/posts" for ::1 at 2020-07-29 20:22:17 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+Started POST "/login" for ::1 at 2020-07-29 20:22:17 -0500
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (12.32ms)
+Completed 200 OK in 15ms (Views: 13.6ms | ActiveRecord: 1.0ms | Allocations: 4105)
+
+
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 261ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 807)
+
+
+Started POST "/logged_in" for ::1 at 2020-07-29 20:22:17 -0500
+Processing by AuthController#logged_in as JSON
+  Parameters: {"_json"=>6, "auth"=>{"_json"=>6}}
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms | Allocations: 117)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started GET "/posts" for ::1 at 2020-07-29 20:38:34 -0500
+Started POST "/login" for ::1 at 2020-07-29 20:38:34 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as */*
+Processing by AuthController#login as JSON
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.21ms)
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+Completed 200 OK in 245ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 2307)
+
+
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (257.98ms)
+Completed 200 OK in 265ms (Views: 261.9ms | ActiveRecord: 0.8ms | Allocations: 4882)
+
+
+Started POST "/logged_in" for ::1 at 2020-07-29 20:38:34 -0500
+Processing by AuthController#logged_in as JSON
+  Parameters: {"_json"=>6, "auth"=>{"_json"=>6}}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 117)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started POST "/login" for ::1 at 2020-07-29 20:46:30 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 247ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 808)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:46:31 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (9.79ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.0ms | Allocations: 3803)
+
+
+Started POST "/login" for ::1 at 2020-07-29 20:47:05 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 263ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 788)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 20:47:05 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (9.3ms)
+Completed 200 OK in 10ms (Views: 9.1ms | ActiveRecord: 0.6ms | Allocations: 3752)
+
+
+Started POST "/login" for ::1 at 2020-07-29 20:52:15 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms | Allocations: 159)
+
+
+  
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+  
+actionpack (6.0.3.2) lib/action_controller/metal/request_forgery_protection.rb:215:in `handle_unverified_request'
+actionpack (6.0.3.2) lib/action_controller/metal/request_forgery_protection.rb:247:in `handle_unverified_request'
+actionpack (6.0.3.2) lib/action_controller/metal/request_forgery_protection.rb:242:in `verify_authenticity_token'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:428:in `block in make_lambda'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:200:in `block (2 levels) in halting'
+actionpack (6.0.3.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:201:in `block in halting'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:513:in `block in invoke_before'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:513:in `each'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:513:in `invoke_before'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:134:in `run_callbacks'
+actionpack (6.0.3.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/instrumentation.rb:33:in `block in process_action'
+activesupport (6.0.3.2) lib/active_support/notifications.rb:180:in `block in instrument'
+activesupport (6.0.3.2) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.0.3.2) lib/active_support/notifications.rb:180:in `instrument'
+actionpack (6.0.3.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+activerecord (6.0.3.2) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.0.3.2) lib/abstract_controller/base.rb:136:in `process'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/posts" for ::1 at 2020-07-29 20:52:16 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (32.02ms)
+Completed 200 OK in 41ms (Views: 30.2ms | ActiveRecord: 2.8ms | Allocations: 14823)
+
+
+Started POST "/login" for ::1 at 2020-07-29 21:12:16 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+Completed 500 Internal Server Error in 518ms (ActiveRecord: 1.2ms | Allocations: 79994)
+
+
+  
+NameError (undefined local variable or method `created' for #<AuthController:0x00007f9e1de4e478>):
+  
+app/controllers/auth_controller.rb:9:in `login'
+Started GET "/posts" for ::1 at 2020-07-29 21:12:16 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (1.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (71.9ms)
+Completed 200 OK in 85ms (Views: 71.1ms | ActiveRecord: 2.3ms | Allocations: 13679)
+
+
+Started POST "/login" for ::1 at 2020-07-29 21:12:52 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+Completed 500 Internal Server Error in 563ms (ActiveRecord: 0.6ms | Allocations: 73694)
+
+
+  
+NameError (undefined local variable or method `created' for #<AuthController:0x00007f9e1947ebe0>):
+  
+app/controllers/auth_controller.rb:9:in `login'
+Started GET "/posts" for ::1 at 2020-07-29 21:12:53 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (7.9ms)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.7ms | Allocations: 3751)
+
+
+Started POST "/login" for ::1 at 2020-07-29 21:13:24 -0500
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (2.89ms)
+Completed 200 OK in 334ms (Views: 4.0ms | ActiveRecord: 1.4ms | Allocations: 7275)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 21:13:25 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (74.7ms)
+Completed 200 OK in 86ms (Views: 69.9ms | ActiveRecord: 7.0ms | Allocations: 14352)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:39:47 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (2.71ms)
+Completed 200 OK in 257ms (Views: 5.1ms | ActiveRecord: 0.8ms | Allocations: 805)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:39:47 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (39.03ms)
+Completed 200 OK in 41ms (Views: 37.3ms | ActiveRecord: 2.7ms | Allocations: 3803)
+
+
+Started POST "/likes" for ::1 at 2020-07-29 23:39:53 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Create (4.7ms)[0m  [1m[32mINSERT INTO "likes" ("post_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["post_id", 1], ["created_at", "2020-07-30 04:39:53.638937"], ["updated_at", "2020-07-30 04:39:53.638937"]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (1.46ms)
+Completed 200 OK in 37ms (Views: 2.5ms | ActiveRecord: 7.6ms | Allocations: 4327)
+
+
+Started POST "/comments" for ::1 at 2020-07-29 23:40:03 -0500
+Processing by CommentsController#create as JSON
+  Parameters: {"content"=>"yesyesyesyes", "post_id"=>1, "comment"=>{"content"=>"yesyesyesyes", "post_id"=>1}}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with CommentSerializer (2.12ms)
+Completed 200 OK in 51ms (Views: 4.3ms | ActiveRecord: 2.4ms | Allocations: 7686)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:40:12 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 273ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:40:13 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (33.82ms)
+Completed 200 OK in 40ms (Views: 33.6ms | ActiveRecord: 0.8ms | Allocations: 3873)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:40:48 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 272ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:40:48 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (13.88ms)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.7ms | Allocations: 3873)
+
+
+Started POST "/comments" for ::1 at 2020-07-29 23:40:51 -0500
+Processing by CommentsController#create as JSON
+  Parameters: {"content"=>"ad", "post_id"=>1, "user_id"=>1, "comment"=>{"content"=>"ad", "post_id"=>1, "user_id"=>1}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mComment Create (1.0ms)[0m  [1m[32mINSERT INTO "comments" ("content", "post_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ad"], ["post_id", 1], ["user_id", 1], ["created_at", "2020-07-30 04:40:51.590489"], ["updated_at", "2020-07-30 04:40:51.590489"]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with CommentSerializer (0.48ms)
+Completed 200 OK in 33ms (Views: 0.9ms | ActiveRecord: 5.4ms | Allocations: 5167)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:40:58 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 200 OK in 259ms (Views: 0.8ms | ActiveRecord: 0.8ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:40:58 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (55.7ms)
+Completed 200 OK in 58ms (Views: 55.3ms | ActiveRecord: 1.6ms | Allocations: 4030)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:42:06 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 292ms (Views: 2.2ms | ActiveRecord: 1.0ms | Allocations: 7705)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:42:06 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (268.34ms)
+Completed 200 OK in 287ms (Views: 262.2ms | ActiveRecord: 8.3ms | Allocations: 18408)
+
+
+Started POST "/likes" for ::1 at 2020-07-29 23:42:08 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (0.8ms)
+Completed 200 OK in 31ms (Views: 1.5ms | ActiveRecord: 1.1ms | Allocations: 5025)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:42:15 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 290ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:42:15 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (20.78ms)
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.6ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:43:33 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 321ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:43:34 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (17.89ms)
+Completed 200 OK in 20ms (Views: 17.5ms | ActiveRecord: 1.7ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:45:20 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.28ms)
+Completed 200 OK in 552ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 788)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:45:20 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (42.53ms)
+Completed 200 OK in 45ms (Views: 43.6ms | ActiveRecord: 0.8ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:45:38 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 319ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 788)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:45:39 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (13.12ms)
+Completed 200 OK in 14ms (Views: 12.8ms | ActiveRecord: 1.0ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:47:39 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.57ms)
+Completed 200 OK in 362ms (Views: 3.9ms | ActiveRecord: 1.0ms | Allocations: 792)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:47:40 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (120.77ms)
+Completed 200 OK in 136ms (Views: 127.1ms | ActiveRecord: 1.3ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:57:38 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.46ms)
+Completed 200 OK in 377ms (Views: 4.5ms | ActiveRecord: 0.7ms | Allocations: 808)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:58:24 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.22ms)
+Completed 200 OK in 473ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 789)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:58:24 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (1.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.7ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (44.93ms)
+Completed 200 OK in 64ms (Views: 43.9ms | ActiveRecord: 2.6ms | Allocations: 4068)
+
+
+Started POST "/login" for ::1 at 2020-07-29 23:59:27 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 303ms (Views: 0.6ms | ActiveRecord: 0.4ms | Allocations: 787)
+
+
+Started GET "/posts" for ::1 at 2020-07-29 23:59:27 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (14.79ms)
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 1.1ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2020-07-30 00:01:27 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 374ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 791)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:01:27 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (34.87ms)
+Completed 200 OK in 37ms (Views: 34.7ms | ActiveRecord: 0.9ms | Allocations: 4017)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:05:36 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.03ms)
+Completed 200 OK in 90ms (Views: 51.8ms | ActiveRecord: 2.2ms | Allocations: 8813)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:05:36 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (7.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (117.8ms)
+Completed 200 OK in 150ms (Views: 108.0ms | ActiveRecord: 11.9ms | Allocations: 18315)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:06:34 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (8.47ms)
+Completed 200 OK in 22ms (Views: 19.6ms | ActiveRecord: 0.6ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:06:34 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (42.74ms)
+Completed 200 OK in 45ms (Views: 43.0ms | ActiveRecord: 0.9ms | Allocations: 4017)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:08:32 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (1.82ms)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.4ms | Allocations: 1935)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:10:00 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (1.41ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.3ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:10:00 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (22.48ms)
+Completed 200 OK in 24ms (Views: 21.5ms | ActiveRecord: 1.9ms | Allocations: 4017)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:11:25 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (4.76ms)
+Completed 200 OK in 18ms (Views: 15.7ms | ActiveRecord: 0.4ms | Allocations: 1936)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:11:25 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (60.79ms)
+Completed 200 OK in 67ms (Views: 64.8ms | ActiveRecord: 1.4ms | Allocations: 4017)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:12:31 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.15ms)
+Completed 200 OK in 9ms (Views: 7.4ms | ActiveRecord: 0.5ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:12:31 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (2.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (13.47ms)
+Completed 200 OK in 15ms (Views: 11.9ms | ActiveRecord: 2.4ms | Allocations: 4017)
+
+
+Started POST "/comments" for ::1 at 2020-07-30 00:12:52 -0500
+Processing by CommentsController#create as JSON
+  Parameters: {"content"=>"yesyesyesyes", "post_id"=>1, "user_id"=>"6", "comment"=>{"content"=>"yesyesyesyes", "post_id"=>1, "user_id"=>"6"}}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("content", "post_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["content", "yesyesyesyes"], ["post_id", 1], ["user_id", 6], ["created_at", "2020-07-30 05:12:53.056618"], ["updated_at", "2020-07-30 05:12:53.056618"]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with CommentSerializer (2.36ms)
+Completed 200 OK in 25ms (Views: 3.8ms | ActiveRecord: 3.7ms | Allocations: 5684)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:13:09 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.59ms)
+Completed 200 OK in 14ms (Views: 12.8ms | ActiveRecord: 0.4ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:13:10 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.9ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (25.93ms)
+Completed 200 OK in 27ms (Views: 24.9ms | ActiveRecord: 1.7ms | Allocations: 4161)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:14:16 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (4.27ms)
+Completed 200 OK in 10ms (Views: 8.8ms | ActiveRecord: 0.3ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:14:16 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (13.11ms)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 1.1ms | Allocations: 4161)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:15:28 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.52ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.3ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:15:28 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (2.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (17.35ms)
+Completed 200 OK in 19ms (Views: 15.3ms | ActiveRecord: 3.1ms | Allocations: 4161)
+
+
+Started POST "/likes" for ::1 at 2020-07-30 00:15:30 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (3.4ms)
+Completed 200 OK in 35ms (Views: 4.9ms | ActiveRecord: 1.2ms | Allocations: 4917)
+
+
+Started POST "/likes" for ::1 at 2020-07-30 00:15:34 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (1.98ms)
+Completed 200 OK in 23ms (Views: 2.9ms | ActiveRecord: 1.3ms | Allocations: 4401)
+
+
+Started GET "/users" for ::1 at 2020-07-30 00:15:41 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (3.04ms)
+Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.5ms | Allocations: 1935)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 00:15:41 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (12.07ms)
+Completed 200 OK in 13ms (Views: 11.9ms | ActiveRecord: 0.8ms | Allocations: 4161)
+
+
+Started POST "/posts" for ::1 at 2020-07-30 00:17:00 -0500
+Processing by PostsController#create as 
+  Parameters: {"title"=>"This Post is a test", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"Thiis post is test lol", "user_id"=>"6", "post"=>{"title"=>"This Post is a test", "image_url"=>"https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif", "content"=>"Thiis post is test lol", "user_id"=>"6"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[36mPost Create (1.2ms)[0m  [1m[32mINSERT INTO "posts" ("title", "image_url", "content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "This Post is a test"], ["image_url", "https://media3.giphy.com/media/tXlpbXfu7e2Pu/source.gif"], ["content", "Thiis post is test lol"], ["user_id", 6], ["created_at", "2020-07-30 05:17:00.965177"], ["updated_at", "2020-07-30 05:17:00.965177"]]
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:10:in `create'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:11:in `create'
+[active_model_serializers]   [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:11:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (88.22ms)
+Completed 200 OK in 108ms (Views: 88.2ms | ActiveRecord: 5.3ms | Allocations: 6577)
+
+
+Started GET "/users" for ::1 at 2020-07-30 09:25:54 -0500
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.2ms)
+Completed 200 OK in 88ms (Views: 42.9ms | ActiveRecord: 2.5ms | Allocations: 9613)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 09:25:54 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (2.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (5.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (242.3ms)
+Completed 200 OK in 304ms (Views: 208.0ms | ActiveRecord: 41.2ms | Allocations: 23635)
+
+
+Started POST "/likes" for ::1 at 2020-07-30 09:26:00 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>1, "like"=>{"post_id"=>1}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (1.0ms)
+Completed 200 OK in 525ms (Views: 1.7ms | ActiveRecord: 0.8ms | Allocations: 198756)
+
+
+Started POST "/likes" for ::1 at 2020-07-30 09:26:06 -0500
+Processing by LikesController#create as JSON
+  Parameters: {"post_id"=>2, "like"=>{"post_id"=>2}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = ? LIMIT ?[0m  [["post_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[36mLike Create (17.4ms)[0m  [1m[32mINSERT INTO "likes" ("post_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["post_id", 2], ["created_at", "2020-07-30 14:26:06.390625"], ["updated_at", "2020-07-30 14:26:06.390625"]]
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+  [1m[35m (11.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/likes_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with LikeSerializer (1.44ms)
+Completed 200 OK in 77ms (Views: 3.1ms | ActiveRecord: 29.5ms | Allocations: 4913)
+
+
+Started GET "/users" for ::1 at 2020-07-30 09:26:14 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+No serializer found for resource: #<User id: 1, username: "sylviawoods", email: "sylviacooks@mail.com", password_digest: [FILTERED], created_at: "2020-07-29 20:38:31", updated_at: "2020-07-29 20:38:31">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with User::ActiveRecord_Relation (2.28ms)
+Completed 200 OK in 8ms (Views: 6.9ms | ActiveRecord: 0.4ms | Allocations: 1953)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 09:26:14 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.8ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (23.72ms)
+Completed 200 OK in 27ms (Views: 24.7ms | ActiveRecord: 1.6ms | Allocations: 6794)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 09:46:50 -0500
+  [1m[35m (14.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (1.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (8.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (400.24ms)
+Completed 200 OK in 463ms (Views: 372.5ms | ActiveRecord: 32.4ms | Allocations: 24874)
+
+
+Started POST "/login" for ::1 at 2020-07-30 09:51:43 -0500
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 676ms (Views: 2.4ms | ActiveRecord: 5.0ms | Allocations: 8561)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 09:51:44 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (2.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (390.03ms)
+Completed 200 OK in 402ms (Views: 381.9ms | ActiveRecord: 9.8ms | Allocations: 23445)
+
+
+Started GET "/logged_in" for ::1 at 2020-07-30 09:57:46 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 4ms (ActiveRecord: 0.0ms | Allocations: 204)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started GET "/logged_in" for ::1 at 2020-07-30 09:58:22 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 55ms (ActiveRecord: 2.1ms | Allocations: 2885)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started GET "/loggedin" for ::1 at 2020-07-30 09:59:53 -0500
+  [1m[35m (33.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 29ms (ActiveRecord: 1.6ms | Allocations: 3567)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:15:in `logged_in'
+Started GET "/loggedin" for ::1 at 2020-07-30 10:00:20 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 43497ms (ActiveRecord: 3.6ms | Allocations: 40209)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:16:in `logged_in'
+Started POST "/login" for ::1 at 2020-07-30 10:01:12 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 411ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 5209)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:01:13 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (149.76ms)
+Completed 200 OK in 170ms (Views: 141.6ms | ActiveRecord: 9.0ms | Allocations: 23416)
+
+
+Started GET "/loggedin" for ::1 at 2020-07-30 10:01:22 -0500
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 34614ms (ActiveRecord: 0.0ms | Allocations: 3132)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:16:in `logged_in'
+Started GET "/loggedin" for ::1 at 2020-07-30 10:02:37 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 2135ms (ActiveRecord: 0.9ms | Allocations: 5210)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:17:in `logged_in'
+Started POST "/login" for ::1 at 2020-07-30 10:02:46 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Completed 200 OK in 113718ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 101269)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:04:39 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (97.26ms)
+Completed 200 OK in 106ms (Views: 91.0ms | ActiveRecord: 7.2ms | Allocations: 21196)
+
+
+Started GET "/loggedin" for ::1 at 2020-07-30 10:05:08 -0500
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 81872ms (ActiveRecord: 1.2ms | Allocations: 41780)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:17:in `logged_in'
+Started GET "/loggedin" for ::1 at 2020-07-30 10:06:51 -0500
+  [1m[35m (7.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthController#logged_in as */*
+Completed 404 Not Found in 3508ms (ActiveRecord: 1.6ms | Allocations: 39755)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/auth_controller.rb:17:in `logged_in'
+Started POST "/login" for ::1 at 2020-07-30 10:11:48 -0500
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.39ms)
+Completed 200 OK in 489ms (Views: 4.2ms | ActiveRecord: 3.1ms | Allocations: 8449)
+
+
+Started POST "/login" for ::1 at 2020-07-30 10:13:04 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 539ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 798)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:13:05 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (4.9ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (256.54ms)
+Completed 200 OK in 284ms (Views: 251.6ms | ActiveRecord: 16.9ms | Allocations: 23417)
+
+
+Started POST "/login" for ::1 at 2020-07-30 10:14:46 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 361ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 799)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:14:46 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (67.2ms)
+Completed 200 OK in 69ms (Views: 65.7ms | ActiveRecord: 2.5ms | Allocations: 6825)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:16:38 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (30.46ms)
+Completed 200 OK in 36ms (Views: 34.3ms | ActiveRecord: 1.4ms | Allocations: 6842)
+
+
+Started GET "/" for ::1 at 2020-07-30 10:18:58 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tobyboudreaux/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 23.4ms | Allocations: 315)
+Completed 200 OK in 68ms (Views: 42.6ms | ActiveRecord: 0.0ms | Allocations: 1748)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:19:08 -0500
+Processing by PostsController#index as HTML
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (159.39ms)
+Completed 200 OK in 171ms (Views: 153.1ms | ActiveRecord: 7.8ms | Allocations: 21731)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:19:32 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#index as HTML
+[active_model_serializers]   [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (275.42ms)
+Completed 200 OK in 291ms (Views: 261.9ms | ActiveRecord: 15.3ms | Allocations: 30315)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:20:52 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (2.8ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (98.79ms)
+Completed 200 OK in 101ms (Views: 93.7ms | ActiveRecord: 6.4ms | Allocations: 9446)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:21:02 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (60.03ms)
+Completed 200 OK in 62ms (Views: 59.1ms | ActiveRecord: 2.0ms | Allocations: 9446)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:21:30 -0500
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (196.13ms)
+Completed 200 OK in 215ms (Views: 182.7ms | ActiveRecord: 16.4ms | Allocations: 33707)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:24:18 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (2.0ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (2.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (235.06ms)
+Completed 200 OK in 236ms (Views: 222.6ms | ActiveRecord: 13.2ms | Allocations: 9468)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:25:09 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (32.93ms)
+Completed 200 OK in 34ms (Views: 31.8ms | ActiveRecord: 1.9ms | Allocations: 9465)
+
+
+Started POST "/login" for ::1 at 2020-07-30 10:26:22 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 373ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 1007)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:26:23 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (64.98ms)
+Completed 200 OK in 67ms (Views: 64.5ms | ActiveRecord: 1.7ms | Allocations: 9446)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:26:29 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (1.7ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.4ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (146.56ms)
+Completed 200 OK in 187ms (Views: 145.4ms | ActiveRecord: 4.2ms | Allocations: 9465)
+
+
+Started POST "/login" for ::1 at 2020-07-30 10:27:14 -0500
+Processing by AuthController#login as JSON
+  Parameters: {"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]", "auth"=>{"username"=>"TobyBboy", "email"=>"yeeticus@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "TobyBboy"], ["LIMIT", 1]]
+  ↳ app/controllers/auth_controller.rb:4:in `login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 410ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 782)
+
+
+Started GET "/posts" for ::1 at 2020-07-30 10:27:15 -0500
+Processing by PostsController#index as */*
+[active_model_serializers]   [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/posts" for ::1 at 2020-07-30 10:27:15 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Processing by PostsController#index as */*
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mLike Load (0.5ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.7ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 1]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (77.85ms)
+Completed 200 OK in 79ms (Views: 74.9ms | ActiveRecord: 3.9ms | Allocations: 12128)
+
+
+[active_model_serializers]   [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers]   [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = ?[0m  [["post_id", 2]]
+[active_model_serializers]   ↳ app/controllers/posts_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with PostSerializer (467.09ms)
+Completed 200 OK in 469ms (Views: 458.6ms | ActiveRecord: 9.8ms | Allocations: 20777)
+
+
