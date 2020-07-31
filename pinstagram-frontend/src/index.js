@@ -8,6 +8,7 @@ const createForm = document.getElementById('new-user-form')
 let loginBtn = document.createElement('button')
 let createBtn = document.createElement('button')
 let logoutBtn = document.createElement('button')
+    logoutBtn.setAttribute('class', 'logout-btn')
 
 createBtn.innerText = "Sign Up"
 loginBtn.innerText = "Login"
@@ -143,13 +144,14 @@ function createPost() {
 function createPostForm() {
     let top = document.getElementById('top')
     let form = document.createElement('form')
+        form.setAttribute('class', 'new-post-form')
     let button = document.getElementById('create-post')
     top.appendChild(form)
     form.innerHTML = `
-        <input id="title_input" type="text" name="title" placeholder="Add Title"/>
-        <input id="image_input" type="text" name="imgae" placeholder="Add Image URL"/>
-        <input id="content_input" type="text" name="content" placeholder="Add Content"/>
-        <input type="submit" value="Submit"/>
+        <input class="new-post-input" id="title_input" type="text" name="title" placeholder="Add Title"/>
+        <input class="new-post-input" id="image_input" type="text" name="imgae" placeholder="Add Image URL"/>
+        <input class="new-post-input" id="content_input" type="text" name="content" placeholder="Add Description"/>
+        <input type="submit" value="New Post" class="post-btn"/>
     `
     form.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -157,7 +159,7 @@ function createPostForm() {
             "title": e.target.title_input.value,
             "image_url": e.target.image_input.value,
             "content": e.target.content_input.value,
-            "user_id": sessionStorage["user_id"]
+            "user_id": sessionStorage["id"]
         }
         console.log(post)
         button.classList.remove('hidden')
@@ -184,15 +186,17 @@ function postNewPost(post) {
 }
 
 function createPostCard(post) {
-    const postCont = document.getElementById('post') 
-    const newDiv =  document.createElement('div')    
-    newDiv.setAttribute('id', `post-card-${post.id}`)    
+    const postCont = document.getElementById('post')
+        postCont.setAttribute('class', 'container') 
+    const newDiv =  document.createElement('div')
+         newDiv.setAttribute('id', `post-card-${post.id}`) 
+         newDiv.setAttribute('class', 'post-card')    
     postCont.append(newDiv)    
     newDiv.innerHTML += `        
-        <h1>${post.title}</h1>       
-        <img src="${post.image_url}">        
+        <h1>${post.title}</h1><br>       
+        <img src="${post.image_url}">
         <h3>${post.content}</h3>         
-        <ul id='comment-list-${post.id}'>
+        <ul class="comment-list" id='comment-list-${post.id}'>
         </ul>
     `   
 }
@@ -203,7 +207,7 @@ function renderLikes(post) {
     card.appendChild(div)
     div.innerHTML += `
         <p id="like-${post.id}">Likes: <span id="span-${post.id}">${post.likes.length}</span></p>        
-        <button id="likebtn-${post.id}">Like</button>   
+        <button id="likebtn-${post.id}" class="like-btn">Like</button>   
     `
     likePost(post)
 }
@@ -229,8 +233,6 @@ function postLikes(post) {
             post_id: post.id
         })
     })
- 
-    
 }
 
 function renderComments(post) {
@@ -240,7 +242,7 @@ function renderComments(post) {
     div.innerHTML += `
         <h3>Comments</h3>
         <div id="button-form-${post.id}">
-        <button id="commentBtn-${post.id}">Comment</button>
+        <button id="commentBtn-${post.id}">Add Comment</button>
     `
     ul = document.getElementById(`comment-list-${post.id}`)
     post.comments.forEach(comment => {
@@ -261,10 +263,11 @@ function newComment(post) {
         e.preventDefault()
         commentBtn.classList.add('hidden')
         let form = document.createElement('form')
+            form.setAttribute('class', 'comment-form')
         form.id = `commentForm-${post.id}`
         form.innerHTML = `
-            <input id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
-            <input type="submit" value="Submit"/>
+            <br><input class="comment_input" id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
+            <br><input type="submit" value="Post Comment" class="comment_btn"/>
         `
         btnFrm.appendChild(form)
         getForm(commentBtn, post)
@@ -279,13 +282,15 @@ function getForm(btn, post) {
         btnFrm.removeChild(form)
         btn.classList.remove('hidden')
         const comment = (e.target.comment_input.value)
-        
+        if(comment !== ""){
         let ul = document.getElementById(`comment-list-${post.id}`)
         ul.innerHTML += `
-            <li>${comment}</li>
-        <br><br>
+            <br><li>${comment}</li>
+        <br>
         `
-        postComment(comment, post);
+        }
+        if(comment !== "")
+        {postComment(comment, post);}
     })
 }
 
@@ -299,7 +304,7 @@ function postComment(comment, post) {
         body: JSON.stringify({
             content: comment,
             post_id: post.id,
-            user_id: sessionStorage["user_id"]
+            user_id: sessionStorage["id"]
         })
     })
    

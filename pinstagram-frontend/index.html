@@ -10,29 +10,29 @@
     <header id='top'>
       <h2>Pinstagram</h2>
     </header>
-
-    <div id="login-window">
-      <form id="login-form" method="post" >
-        <div class="form-group">
-          <input id="username_input" type="text" name="username" placeholder="Username"/>
-          <input id="email_input" type="text" name="email" placeholder="Email"/>
-          <input id="password_input" type="text" name="password" placeholder="Password"/>
-          <input type="submit" value="Submit"/>
+    <div class="user-container">
+      <div id="login-window">
+        <form id="login-form" method="post" class="login-form" >
+          <div class="form-group">
+            <input class="login-input" id="username_input" type="text" name="username" placeholder="Username"/><br><br>
+            <input class="login-input"  id="email_input" type="text" name="email" placeholder="Email"/><br><br>
+            <input class="login-input"  id="password_input" type="text" name="password" placeholder="Password"/><br><br>
+            <input type="submit" value="Login" class="login-btn"/>
+            </div>
           </div>
-        </div>
-      </form>
-      <form id="new-user-form" method="post" >
-        <div class="form-group">
-          <input id="username_input" type="text" name="username" placeholder="Username"/>
-          <input id="email_input" type="text" name="email" placeholder="Email"/>
-          <input id="password_input" type="text" name="password" placeholder="Password"/>
-          <input type="submit" value="Submit"/>
+        </form>
+        <form id="new-user-form" method="post" class="new-user-form" >
+          <div class="form-group">
+            <input class="signup-input" id="username_input" type="text" name="username" placeholder="Username"/><br><br>
+            <input class="signup-input" id="email_input" type="text" name="email" placeholder="Email"/><br><br>
+            <input class="signup-input" id="password_input" type="text" name="password" placeholder="Password"/><br><br>
+            <input type="submit" value="Signup" class="signup-btn"/>
+            </div>
           </div>
-        </div>
-      </form>
-      <div id="error-msg"></div>
-    </div>
-
+        </form>
+        <div id="error-msg"></div>
+      </div>
+  </div>
     <main id="post">
     </main>
     <script src="./src/index.js"></script>

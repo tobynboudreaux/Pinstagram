@@ -5,9 +5,169 @@
     display: none;
 }
 
+.user-container{
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.login-form{
+    width: 300px;
+    height: 200px;
+    background-image: linear-gradient(to bottom right, rgb(36, 38, 48), rgb(87, 110, 116));
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    /* left: 50%; */
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.login-form .login-input{
+    width: 100%;
+    /* overflow: hidden; */
+    font-size: 15px;
+    text-align: left;
+    padding: 3px 0;
+    margin: 3px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #cecece;
+    color: #cecece;
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.login-btn{
+    background-color:  rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+.login-btn:hover{
+    background-color: rgb(68, 68, 95);
+}
+
+.logout-btn{
+    margin: 0;
+    position: absolute;
+    top: 40px;
+    left: 475px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.new-user-form{
+    width: 300px;
+    height: 200px;
+    background-image: linear-gradient(to bottom right, rgb(36, 38, 48), rgb(87, 110, 116));
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    /* left: 50%; */
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.new-user-form .signup-input{
+    width: 100%;
+    /* overflow: hidden; */
+    font-size: 15px;
+    text-align: left;
+    padding: 3px 0;
+    margin: 3px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #cecece;
+    color: #cecece;
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.signup-btn{
+    background-color:  rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+.signup-btn:hover{
+    background-color: rgb(68, 68, 95);
+}
+
+/* .new-post-form{
+    width: 200px;
+    height: 175px;
+    background-image: linear-gradient(to bottom right, rgb(36, 38, 48), rgb(87, 110, 116));
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0px;
+    position: absolute;
+    top: 225px;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+} */
+
+.new-post-form .new-post-input{
+    width: 300;
+    /* overflow: hidden; */
+    font-size: 15px;
+    text-align: center;
+    padding: 3px 0;
+    margin: 3px 0;
+    background: #262635;
+    border: none;
+    /* border-bottom: 1px solid #cecece; */
+    color: #cecece;
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.new-post-form .new-post-input::placeholder{
+   color: #3f3f69;
+}
+
+.post-btn{
+    background-color:  rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    border: none; 
+    transition-duration: 0.4s;
+}
+.post-btn:hover{
+    background-color: rgb(68, 68, 95);
+}
+
 header{
     text-align: center;
-    font-size: xx-large;
+    font-size: 40px;
     text-shadow: 2px 2px 15px ghostwhite;
 }
 body{
@@ -20,7 +180,7 @@ body{
 
 .container{
     width: 1200px;
-    margin: 200px auto;
+    margin: 50px auto;
     columns: 4;
     column-gap: 40px;
     color: rgb(233, 233, 233);
@@ -32,6 +192,7 @@ body{
     padding: 10px;
     /* background: #6C6C6C; */
     background-image: linear-gradient(to bottom right, rgb(36, 38, 48), rgb(87, 110, 116) );
+    border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(19, 19, 19);
     overflow: hidden;
     break-inside: avoid;
@@ -63,6 +224,7 @@ body{
 
 button{
     background-color:  rgb(66, 98, 124);
+    box-shadow: 1px 1px 4px rgb(54, 56, 58);
     color: rgb(255, 255, 255);
     margin: 5px;
     padding: 5px;
@@ -78,17 +240,10 @@ button:hover{
 }
 
 .like-btn{
-    box-shadow: 1px 1px 4px rgb(54, 56, 58);
-    color: rgb(209, 209, 209);
-    /* font-weight: bolder; */
+    /* float: right; */
 }
 
-.like-btn:hover{
-    background-color: rgb(36, 38, 48);
-    
-}
-
-.comment-btn{
+.comment_btn{
     background-color:rgb(66, 98, 124);
     box-shadow: 1px 1px 4px rgb(54, 56, 58);
     color: rgb(209, 209, 209);
@@ -100,8 +255,8 @@ button:hover{
     transition-duration: 0.4s;
 }
 
-.comment-btn:hover{
-    background-color: rgb(36, 38, 48);
+.comment_btn:hover{
+    background-color: rgb(68, 68, 95);
     
 }
 
@@ -123,7 +278,43 @@ button:hover{
 
 }
 
-.submit-comment{
+.comment-list{
+    list-style-type: none;
+    text-align: right;
+    font-size: 12px;
+    padding: 20px;
+    background-color: rgb(36, 38, 48);
+}
+
+.comment-list li{
+    background-image: linear-gradient(to left,rgb(87, 110, 116), rgba(0, 0, 0, 0));
+    box-shadow: 1px 1px 4px rgb(19, 20, 34);
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.comment-form .comment_input{
+    width: 100%;
+    /* overflow: hidden; */
+    font-size: 15px;
+    text-align: right;
+    padding: 3px 0;
+    margin: 3px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #cecece;
+    color: #cecece;
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.comment-form .comment_input::placeholder{
+    color:#cecece;;
+    opacity: 1;
+}
+
+.comment-btn{
     background-color:rgb(66, 98, 124);
     box-shadow: 1px 1px 4px rgb(54, 56, 58);
     color: rgb(209, 209, 209);
@@ -133,24 +324,12 @@ button:hover{
     font-size: 15px;
     border: none; 
     transition-duration: 0.4s;
+
 }
-.submit-comment:hover{
+
+.comment-btn:hover{
     background-color: rgb(36, 38, 48);
 }
-
-.comment-list{
-    list-style-type: none;
-    text-align: right;
-    font-size: 15px;
-    padding: 20px;
-    background-color: rgb(36, 38, 48);
-}
-.comment-list li{
-    background-image: linear-gradient(to left,rgb(87, 110, 116), rgba(0, 0, 0, 0));
-    padding: 3px;
-}
-
-
 
 @media (max-width: 1200px)
 {
@@ -159,15 +338,13 @@ button:hover{
         width: calc(100% - 40px);
         box-sizing: border-box;
         padding: 20px 20px 20px 0;
-    }
-    
+    } 
 }
 
 @media (max-width: 770px)
 {
     .container{
         columns: 2;
-    
     }    
 }
 
@@ -175,6 +352,5 @@ button:hover{
 {
     .container{
         columns: 1;
-
     }    
 }
